@@ -77,7 +77,7 @@ async def check():
 
                     cmd.get_week(city[1])
             else:
-                server_send("bad request")
+                server_send("Неверная команда. Попробуй еще разок!")
 
         await asyncio.sleep(1.2)
 
