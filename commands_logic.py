@@ -6,10 +6,17 @@ import requests
 CURRENT_WEATHER = 'http://api.openweathermap.org/data/2.5/weather?'
 FIVE_DAYS_WEATHER = 'http://api.openweathermap.org/data/2.5/forecast?'
 
+HELP_MESSAGE = "Доступные команды : /help , /current , /tommorow, /week \n" + \
+               "/current -  Получить текущую информацию о погоде \n" + \
+               "/tomorrow - Получить прогноз погоды на завтра \n" + \
+               "/week -     Получить прогноз погоды на 5 дней \n" + \
+               "По умолчанию прогноз погоды отображается для Екатеринбурга \n" + \
+               "Для просмотра погоды в других городах просто наберите после команды: \n @Название города \n" + \
+               "Пример: /week@Москва"
 
 #Получение спраки по боту
 def get_help():
-    serv.server_send("Доступные команды : /help , /current , /tommorow, /week")
+    serv.server_send(HELP_MESSAGE)
 
 
 
@@ -97,7 +104,7 @@ def get_week(requested_city):
                       'weather': weather}
             if str(el['date'][1]) == "15:00:00":
                 tomorrow_weather_req.append(answer)
-        result = "Прогноз погоды на пять дней для города "  + str(requested_city).replace('%20', ' ') + ":\n\n" + \
+        result = "Прогноз погоды на пять дней для города " + str(requested_city).replace('%20', ' ') + ":\n\n" + \
                  tomorrow_weather_req[0]['date'] + \
                  tomorrow_weather_req[0]['temp'] + \
                  tomorrow_weather_req[0]['weather'] + \
@@ -149,5 +156,5 @@ def check_city(requested_city):
     if res == 200:
         return True
     else:
-        serv.server_send('Хмммм.... Интересно. Твой город не найден. Попробуй ввести еще разок, кожаный ублюдок')
+        serv.server_send('Хмммм.... Интересно. Твой город не найден. Попробуй ввести еще разок, друг!')
         return False

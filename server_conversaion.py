@@ -28,18 +28,11 @@ async def message_listener():
         return []
 
 
-# Loop command to check messages
-# Бесконечный цикл, который обслуживает прослушку сообщений и передачу команды в корутину.
-# Из полей - первое сообщение; переведен ли бот в рабочий режим; дефолтный класс с настройками пользователя;
-# Класс, который мы получаем из команды с проверками.
+
 async def check():
-    first_msg = True
-    working_state = False
-    user_prefs = None
-    prefs = None
-    # Листенер фида подписан на changes и ждет свой лист
+
     while 1:
-        # Отправляем функцию в корутину, получаем оттуда канал и сообщение
+
         msg = await message_listener()
         if msg:
             channel = msg[1]
@@ -67,9 +60,9 @@ async def check():
                     city = str(message).split(server_api.SEPARATION_KEY)
 
                     cmd.get_tomorrow(city[1])
-
+            # Команда получения прогноза на пять дней
             elif str(message).startswith("/week"):
-                logging.info("Tomorrow weather requested for default city")
+                logging.info("Week weather requested for default city")
                 if str(message) == "/week":
                     cmd.get_week(server_api.DEFAULT_CITY)
                 else:

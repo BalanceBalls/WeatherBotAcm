@@ -5,7 +5,7 @@ from server_conversaion import check, server_send
 
 logging.basicConfig(level=logging.INFO)
 
-# Запуск асинхронного цикла, вынесен отдельно, чтобы можно было спокойно импортить питоновые пакеты.
+
 server_send('Бот запущен')
 logging.info('Бот запущен.')
 try:
